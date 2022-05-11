@@ -7,7 +7,7 @@ function Product(props) {
     return (
         <div className='product' data-index={props.id} onClick={props.onClick} >
             <div className='image-wrapper'>
-                <img src="https://picsum.photos/420/320?image=0" alt="Product" />
+                <img src={`http://localhost:8080/${props.img}`} alt="Product" />
             </div>
             <div className='content-wrapper'>
                 <h3 className='title'>{props.title}</h3>

@@ -37,7 +37,7 @@ function Products() {
     }
 
 
-    const productDivs = productsState.products.map(item => { return <Product onClick={gotoProduct} key={item.listing_id} id={item.listing_id} title={item.title} description={item.description} price={item.price} /> })
+    const productDivs = productsState.products.map(item => { return <Product onClick={gotoProduct} key={item.listing_id} id={item.listing_id} img={item.img} title={item.title} description={item.description} price={item.price} /> })
 
 
     if (currentProduct.selected) {

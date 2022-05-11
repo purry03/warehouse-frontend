@@ -1,0 +1,23 @@
+.product-wrapper {
+    display: flex;
+    padding: 50px;
+}
+
+.product-wrapper .image-wrapper {
+    height: 75vh;
+    min-width: 50%;
+}
+
+.product-wrapper .image-wrapper img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.product-wrapper .content-wrapper {
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}

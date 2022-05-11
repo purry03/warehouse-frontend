@@ -8,7 +8,6 @@ import { Navigate, useParams } from 'react-router-dom';
 
 
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function ProductPage() {
 
@@ -30,7 +29,18 @@ function ProductPage() {
         fetchProducts();
     }, []);
 
-    return (<div>{JSON.stringify(productsState.product)}</div>)
+    return (<div className='product-wrapper'>
+        <div className='image-wrapper'>
+            <img src={`http://localhost:8080/${productsState.product.img}`} alt="Product" />
+        </div>
+        <div className='content-wrapper'>
+            <h1>{productsState.product.title}</h1>
+            <p>{productsState.product.description}</p>
+            <h3>Price : {productsState.product.price}</h3>
+            <h3>Inventory Left : {productsState.product.inventory}</h3>
+        </div>
+
+    </div>)
 
 }
 

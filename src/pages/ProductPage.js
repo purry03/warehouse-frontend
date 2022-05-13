@@ -54,10 +54,9 @@ function ProductPage(props) {
 
     async function onPayment() {
         try {
-            setPaymentCompleted(true);
             const response = await api.prebookings.book(cookies.accessToken, productsState.product.listing_id, prebookingQuantity)
             setPrebookingNumber(response.data.prebooking_number);
-            fetchProducts();
+            setPaymentCompleted(true);
         }
         catch (err) {
             toast.error(err.toString());

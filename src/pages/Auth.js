@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Auth.css";
 import { Cookies, useCookies } from 'react-cookie';
-
+import cookie from "react-cookie";
 import { Navigate } from 'react-router-dom';
 
 
@@ -22,8 +22,7 @@ function Auth() {
         confirm_password: ''
     });
     const [loggedIn, setLoggedIn] = useState(false);
-    const [accessToken, setAccessToken] = useCookies(['accessToken']);
-    const [refreshToken, setRefreshToken] = useCookies(['refreshToken']);
+    const [cookies, setCookies] = useCookies(['username', 'accessToken', 'refreshToken']);
     const [type, setType] = useState("");
 
 
@@ -36,8 +35,9 @@ function Auth() {
         try {
             const response = await api.auth.login(inputField.username, inputField.password);
             toast.success("Logged In");
-            setAccessToken(response.accessToken);
-            setRefreshToken(response.refreshToken);
+            setCookies("username", response.username, { path: "/" });
+            setCookies("accessToken", response.accessToken, { path: "/" });
+            setCookies("refreshToken", response.refreshToken, { path: "/" });
             setType(response.type);
             setLoggedIn(true);
         }

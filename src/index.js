@@ -6,10 +6,11 @@ import { CookiesProvider } from 'react-cookie';
 
 import "./index.css"
 
+import Nav from "./pages/Nav";
+
 import Auth from "./pages/Auth";
 import Products from './pages/Products';
 import ProductPage from './pages/ProductPage';
-import Nav from "./pages/Nav";
 
 import { ToastContainer } from 'react-toastify';
 

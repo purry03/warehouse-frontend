@@ -10,7 +10,7 @@ const login = (username, password) => {
                 password
             }
         }).then((response) => {
-            resolve({ accessToken: response.data.access_token, refreshToken: response.data.refresh_token, type: response.data.type });
+            resolve({ username: response.data.username, accessToken: response.data.access_token, refreshToken: response.data.refresh_token, type: response.data.type });
         }).catch((err) => {
             reject(err);
         });

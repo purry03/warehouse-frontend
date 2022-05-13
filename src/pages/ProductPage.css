@@ -21,3 +21,29 @@
     gap: 15px;
     text-align: center;
 }
+
+
+.prebooking-wrapper {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.prebooking-wrapper label {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.prebooking-wrapper input {
+    padding: 15px 10px;
+    width: 100%;
+    background-color: var(--light);
+    border: 1px solid rgb(85, 85, 85);
+    margin-left: 15px;
+}
+
+.prebooking-wrapper button {
+    min-width: 500px !important;
+}

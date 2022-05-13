@@ -9,25 +9,70 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 
-function ProductPage() {
+import Payment from './Payment';
+import Invoice from './Invoice';
+
+import Button from "../components/Button";
+
+function ProductPage(props) {
 
     const { id } = useParams();
     const [productsState, setProductsState] = useState({ product: {} });
+    const [prebookingQuantity, setPrebookingQuantity] = useState(1);
+    const [prebooked, setPrebooked] = useState(false);
+    const [paymentCompleted, setPaymentCompleted] = useState(false);
+    const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken']);
+    const [price, setPrice] = useState(0);
+    const [prebookingNumber, setPrebookingNumber] = useState('');
 
+    async function fetchProducts() {
+        try {
+            const listing = await api.listing.getByID(id);
+            console.log(listing);
+            setProductsState({ product: listing });
+        }
+        catch (err) {
+            toast.error(err.toString());
+        }
+    }
 
     useEffect(() => {
-        async function fetchProducts() {
-            try {
-                const listing = await api.listing.getByID(id);
-                console.log(listing);
-                setProductsState({ product: listing });
-            }
-            catch (err) {
-                toast.error(err.toString());
-            }
-        }
         fetchProducts();
     }, []);
+
+    function changeQuantity(e) {
+        if (e.target.value < 1) {
+            e.target.value = 1;
+        }
+        setPrebookingQuantity(e.target.value);
+    }
+
+    async function prebook() {
+        setPrebooked(true);
+        setPrice(productsState.product.price * parseInt(prebookingQuantity));
+    }
+
+    async function onPayment() {
+        try {
+            setPaymentCompleted(true);
+            const response = await api.prebookings.book(cookies.accessToken, productsState.product.listing_id, prebookingQuantity)
+            setPrebookingNumber(response.data.prebooking_number);
+            fetchProducts();
+        }
+        catch (err) {
+            toast.error(err.toString());
+        }
+    }
+
+    console.log({ prebooked, paymentCompleted });
+
+    if (prebooked && !paymentCompleted) {
+        return (<Payment product={productsState.product.title} quantity={prebookingQuantity} price={productsState.product.price} totalPrice={price} onPayment={onPayment} />)
+    }
+
+    if (paymentCompleted) {
+        return (<Invoice prebookingNumber={prebookingNumber} product={productsState.product.title} quantity={prebookingQuantity} price={productsState.product.price} totalPrice={price} />);
+    }
 
     return (<div className='product-wrapper'>
         <div className='image-wrapper'>
@@ -38,8 +83,13 @@ function ProductPage() {
             <p>{productsState.product.description}</p>
             <h3>Price : {productsState.product.price}</h3>
             <h3>Inventory Left : {productsState.product.inventory}</h3>
+            <div className='prebooking-wrapper'>
+                <label>Quantity:
+                    <input value={prebookingQuantity} onChange={changeQuantity} min="1" type="number"></input>
+                </label>
+                <Button className='prebooking-button' title={"Prebook"} onClick={prebook}></Button>
+            </div>
         </div>
-
     </div>)
 
 }

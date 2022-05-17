@@ -1,0 +1,39 @@
+.listings-wrapper {
+    margin-top: 50px;
+    padding: 25px;
+}
+
+.listings-wrapper table {
+    margin-top: 25px;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+#title {
+    width: 10%;
+    text-align: center;
+}
+
+#description {
+    width: 750%;
+}
+
+#price {
+    width: 10%;
+    text-align: center;
+}
+
+#inventory {
+    width: 10%;
+    text-align: center;
+}
+
+button {
+    padding: 5px;
+    font-size: 0.9rem;
+}

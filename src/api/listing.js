@@ -1,5 +1,24 @@
 const axios = require('axios').default;
 
+const create = (formData, accessToken) => {
+    return new Promise((resolve, reject) => {
+        axios({
+            method: 'post',
+            url: 'http://localhost:8080/api/listing/add',
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                'content-type': 'multipart/form-data'
+            },
+            data: formData
+        }).then((response) => {
+            resolve(response.data);
+        }).catch((err) => {
+            console.log(err);
+            reject(err);
+        });
+    });
+}
+
 const getAll = () => {
     return new Promise((resolve, reject) => {
         axios({
@@ -61,4 +80,4 @@ const getByUsername = (username, accessToken) => {
 }
 
 
-module.exports = { getAll, getByID, removeByID, getByUsername };
+module.exports = { create, getAll, getByID, removeByID, getByUsername };

@@ -1,0 +1,25 @@
+.addlistings-wrapper {
+    margin-top: 50px;
+    padding: 25px;
+}
+
+.addlistings-wrapper form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.addlistings-wrapper label {
+    display: flex;
+    flex-direction: column;
+}
+
+.addlistings-wrapper label span {
+    font-size: 1.2rem;
+}
+
+.addlistings-wrapper input,
+.addlistings-wrapper textarea {
+    padding: 10px;
+}

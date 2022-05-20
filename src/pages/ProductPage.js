@@ -13,6 +13,7 @@ import Payment from './Payment';
 import Invoice from './Invoice';
 
 import Button from "../components/Button";
+import PageList from '../components/PageList';
 
 function ProductPage(props) {
 
@@ -28,7 +29,6 @@ function ProductPage(props) {
     async function fetchProducts() {
         try {
             const listing = await api.listing.getByID(id);
-            console.log(listing);
             setProductsState({ product: listing });
         }
         catch (err) {
@@ -62,8 +62,6 @@ function ProductPage(props) {
             toast.error(err.toString());
         }
     }
-
-    console.log({ prebooked, paymentCompleted });
 
     if (prebooked && !paymentCompleted) {
         return (<Payment product={productsState.product.title} quantity={prebookingQuantity} price={productsState.product.price} totalPrice={price} onPayment={onPayment} />)

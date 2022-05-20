@@ -19,7 +19,6 @@ const login = (username, password) => {
 
 
 const register = (username, password, type) => {
-    console.log({ username, password, type })
     return new Promise((resolve, reject) => {
         axios({
             method: 'post',
@@ -30,7 +29,6 @@ const register = (username, password, type) => {
                 type
             }
         }).then((response) => {
-            console.log(response);
             resolve(true);
         }).catch((err) => {
             reject(err);

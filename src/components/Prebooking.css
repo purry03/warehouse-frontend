@@ -1,0 +1,25 @@
+.verifyprebooking-wrapper {
+    margin-top: 50px;
+    padding: 25px;
+}
+
+.verifyprebooking-wrapper form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.verifyprebooking-wrapper label {
+    display: flex;
+    flex-direction: column;
+}
+
+.verifyprebooking-wrapper label span {
+    font-size: 1.2rem;
+}
+
+.verifyprebooking-wrapper input,
+.verifyprebooking-wrapper textarea {
+    padding: 10px;
+}

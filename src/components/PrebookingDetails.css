@@ -1,0 +1,9 @@
+.verifyprebooking-wrapper table {
+    width: 100%;
+}
+
+
+.verifyprebooking-wrapper .actions-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}

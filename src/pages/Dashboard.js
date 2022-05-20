@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 import Listings from '../components/Listings';
 import AddListing from '../components/AddListing';
+import Prebooking from '../components/Prebooking';
 
 function Dashboard() {
 
@@ -19,6 +20,8 @@ function Dashboard() {
             <Listings />
 
             <AddListing />
+
+            <Prebooking />
         </div>);
 
 }

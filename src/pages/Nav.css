@@ -1,6 +1,7 @@
 .nav {
     display: flex;
     align-items: center;
+    gap: 10px;
     width: 100%;
     padding: 10px;
     color: white;
@@ -11,7 +12,14 @@
     margin-left: 10px;
 }
 
-.nav h3 {
+.nav .user-wrapper {
     margin-left: auto;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.nav .user-wrapper h3 {
     font-size: 1rem;
 }

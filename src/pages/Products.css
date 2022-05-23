@@ -7,6 +7,20 @@
     font-size: 4rem;
 }
 
+.filter-wrapper {
+    padding: 0 30px;
+    display: flex;
+}
+
+.filter-wrapper label {
+    margin-left: auto;
+}
+
+.filter-wrapper select {
+    padding: 5px;
+    text-align: center;
+}
+
 .products-wrapper {
     padding: 50px;
     display: flex;

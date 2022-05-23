@@ -21,11 +21,14 @@ function Auth() {
         full_name: '',
         confirm_password: ''
     });
+    const [cookies, setCookies] = useCookies(['username', 'type', 'accessToken', 'refreshToken']);
     const [loggedIn, setLoggedIn] = useState(false);
-    const [cookies, setCookies] = useCookies(['username', 'accessToken', 'refreshToken']);
     const [type, setType] = useState("");
 
-
+    if (cookies.username && loggedIn === false) {
+        setLoggedIn(true);
+        setType(cookies.type)
+    }
 
     function onChange(e) {
         setInputField({ ...inputField, [e.target.name]: e.target.value })
@@ -38,6 +41,7 @@ function Auth() {
             setCookies("username", response.username, { path: "/" });
             setCookies("accessToken", response.accessToken, { path: "/" });
             setCookies("refreshToken", response.refreshToken, { path: "/" });
+            setCookies("type", response.type, { path: '/' });
             setType(response.type);
             setLoggedIn(true);
         }

@@ -18,7 +18,7 @@ function Products() {
     const [productsState, setProductsState] = useState({ products: [] });
     const [productCount, setProductCount] = useState(0);
     const [currentProduct, setCurrentProductState] = useState({ id: 0, selected: false });
-    const [itemsOnPage, setItemsOnPage] = useState(2);
+    const [itemsOnPage, setItemsOnPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
@@ -57,7 +57,10 @@ function Products() {
         return products;
     }
 
-    // const productDivs = productsState.products.map(item => { return <Product onClick={gotoProduct} key={item.listing_id} id={item.listing_id} img={item.img} title={item.title} description={item.description} price={item.price} /> })
+    function changeItemCount(e) {
+        const val = parseInt(e.target.value) || 0;
+        setItemsOnPage(parseInt(val));
+    }
 
 
     if (currentProduct.selected) {
@@ -67,6 +70,7 @@ function Products() {
         return (
             <div className='main-wrapper'>
                 <h1 className='main-heading'>Products</h1>
+                <div className='filter-wrapper'><label>Items Per Page: <select onChange={changeItemCount} value={itemsOnPage}><option value={1}>1</option><option value={3}>3</option><option value={5}>5</option></select></label></div>
                 <div className='products-wrapper'>
                     {createProducts()}
                 </div>

@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "./Nav.css";
-import { Cookies, useCookies } from 'react-cookie';
 
-import { Navigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const axios = require('axios').default;
+
+import { UserContext } from '../context';
+
 
 function Nav() {
-    const [cookies, setCookies, removeCookie] = useCookies(["username", "accessToken", "refreshToken"]);
+    const { cookies, dispatchCookieEvent } = useContext(UserContext);
+
 
     function logout() {
-        removeCookie("username");
-        removeCookie("accessToken");
-        removeCookie("refreshToken");
+        dispatchCookieEvent("REMOVE", "username");
+        dispatchCookieEvent("REMOVE", "accessToken");
+        dispatchCookieEvent("REMOVE", "refreshToken");
+        dispatchCookieEvent("REMOVE", "type");
     }
 
     return (

@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import "./ProductPage.css";
+import React, { useContext } from 'react';
 
-import api from "../api";
-
-import { Cookies, useCookies } from 'react-cookie';
-import { Navigate, useParams } from 'react-router-dom';
-
-
-import { toast } from 'react-toastify';
-
-import Button from "../components/Button";
 import "./Payment.css"
+
+import { UserContext } from '../context';
+
+
 
 function Payment(props) {
 
-    const [cookies, setCookies] = useCookies("username", "accessToken", "refreshToken");
+    const { cookies, dispatchCookieEvent } = useContext(UserContext);
 
 
     return (

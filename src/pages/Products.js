@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import "./Products.css";
 
 import api from "../api";
@@ -13,13 +13,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Product from "../components/Product";
 import PageList from '../components/PageList';
 
+import { PageContext } from '../context';
+
+
 function Products() {
 
     const [productsState, setProductsState] = useState({ products: [] });
     const [productCount, setProductCount] = useState(0);
     const [currentProduct, setCurrentProductState] = useState({ id: 0, selected: false });
-    const [itemsOnPage, setItemsOnPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const { itemsOnPage, setItemsOnPage } = useContext(PageContext);
+
 
     useEffect(() => {
         async function fetchProducts() {

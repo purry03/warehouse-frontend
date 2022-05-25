@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "./AddListing.css";
-import { Cookies, useCookies } from 'react-cookie';
 
-import { Navigate } from 'react-router-dom';
 import Button from '../components/Button';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import api, { listing } from '../api';
+import api from '../api';
+
+import { UserContext } from '../context';
+
+
 
 function AddListing() {
 
-    const [cookies, setCookies] = useCookies(["username", "accessToken", "refreshToken"]);
+    const { cookies, dispatchCookieEvent } = useContext(UserContext);
 
     const [inputField, setInputField] = useState({
         title: '',

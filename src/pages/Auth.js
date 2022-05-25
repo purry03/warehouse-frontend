@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "./Auth.css";
 import { Cookies, useCookies } from 'react-cookie';
 import cookie from "react-cookie";
@@ -10,7 +10,10 @@ import { toast } from 'react-toastify';
 import api from "../api";
 
 import Button from "../components/Button";
-import { login, register } from '../api/auth';
+
+import { UserContext } from '../context';
+
+
 
 function Auth() {
 
@@ -21,9 +24,9 @@ function Auth() {
         full_name: '',
         confirm_password: ''
     });
-    const [cookies, setCookies] = useCookies(['username', 'type', 'accessToken', 'refreshToken']);
     const [loggedIn, setLoggedIn] = useState(false);
     const [type, setType] = useState("");
+    const { cookies, dispatchCookieEvent } = useContext(UserContext);
 
     if (cookies.username && loggedIn === false) {
         setLoggedIn(true);
@@ -38,10 +41,10 @@ function Auth() {
         try {
             const response = await api.auth.login(inputField.username, inputField.password);
             toast.success("Logged In");
-            setCookies("username", response.username, { path: "/" });
-            setCookies("accessToken", response.accessToken, { path: "/" });
-            setCookies("refreshToken", response.refreshToken, { path: "/" });
-            setCookies("type", response.type, { path: '/' });
+            dispatchCookieEvent("ADD", "username", response.username, { path: "/" });
+            dispatchCookieEvent("ADD", "accessToken", response.accessToken, { path: "/" });
+            dispatchCookieEvent("ADD", "refreshToken", response.refreshToken, { path: "/" });
+            dispatchCookieEvent("ADD", "type", response.type, { path: '/' });
             setType(response.type);
             setLoggedIn(true);
         }

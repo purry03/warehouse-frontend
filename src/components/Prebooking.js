@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "./Prebooking.css";
-import { Cookies, useCookies } from 'react-cookie';
 
-import { Navigate } from 'react-router-dom';
 import Button from '../components/Button';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
-import api, { listing } from '../api';
+import api from '../api';
 
 import PrebookingDetails from './PrebookingDetails';
-import { approve, cancel } from '../api/prebooking';
+
+
+import { UserContext } from '../context';
+
+
 
 function Prebooking() {
 
-    const [cookies, setCookies] = useCookies(["username", "accessToken", "refreshToken"]);
+    const { cookies, dispatchCookieEvent } = useContext(UserContext);
 
     const [inputField, setInputField] = useState({
         prebookingNumber: ''
@@ -32,9 +33,15 @@ function Prebooking() {
         const prebookingNumber = inputField.prebookingNumber;
         try {
             const prebooking = await api.prebookings.get(prebookingNumber, cookies.accessToken)
-            setPrebookingDetails(prebooking);
-            setDetailsFetched(true);
-            toast.success("Prebooking Fetched");
+            console.log(prebooking);
+            if (!prebooking.err) {
+                setPrebookingDetails(prebooking);
+                setDetailsFetched(true);
+                toast.success("Prebooking Fetched");
+            }
+            else {
+                toast.error("Prebooking Not Found");
+            }
         }
         catch (err) {
             toast.error(err.toString());

@@ -13,13 +13,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Product from "../components/Product";
 import PageList from '../components/PageList';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { set } from './productsSlice'
+
 function Products() {
 
     const [productsState, setProductsState] = useState({ products: [] });
     const [productCount, setProductCount] = useState(0);
     const [currentProduct, setCurrentProductState] = useState({ id: 0, selected: false });
-    const [itemsOnPage, setItemsOnPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const itemsOnPage = useSelector((state) => state.products.itemsOnPage)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         async function fetchProducts() {
@@ -59,7 +64,7 @@ function Products() {
 
     function changeItemCount(e) {
         const val = parseInt(e.target.value) || 0;
-        setItemsOnPage(parseInt(val));
+        dispatch(set(val));
     }
 
 

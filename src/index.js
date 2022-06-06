@@ -1,22 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
+import './index.css';
 
-import "./index.css"
+import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import Nav from './pages/Nav';
 
-import Nav from "./pages/Nav";
-
-import Auth from "./pages/Auth";
+import Auth from './pages/Auth';
 import Products from './pages/Products';
 import ProductPage from './pages/ProductPage';
 import Dashboard from './pages/Dashboard';
 
-import { ToastContainer } from 'react-toastify';
-
-import store from './store'
-import { Provider } from 'react-redux'
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -38,5 +36,5 @@ root.render(
         </BrowserRouter>
       </React.StrictMode>
     </Provider>
-  </CookiesProvider>
+  </CookiesProvider>,
 );

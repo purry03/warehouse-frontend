@@ -18,5 +18,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    indent: 'off',
+    '@typescript-eslint/indent': ['error'],
   },
 };

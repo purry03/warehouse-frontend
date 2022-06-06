@@ -45,81 +45,84 @@ function Invoice(props) {
               <div className="payment border-top mt-3 mb-3 border-bottom table-responsive">
                 <table className="table table-borderless">
                   <tbody>
-                      <tr>
-                        <td>
-                              <div className="py-2">
-                                  <span className="d-block text-muted">Order Date</span>
-                                  <span>{getCurrentDate()}</span>
-                                </div>
-                            </td>
-                        <td>
-                              <div className="py-2">
-                                  <span className="d-block text-muted">Prebooking No</span>
-                                  <span>{props.prebookingNumber}</span>
-                                </div>
-                            </td>
-                        <td>
-                              <div className="py-2">
-                                  <span className="d-block text-muted">Payment</span>
-                                  <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width={20} /></span>
-                                </div>
-                            </td>
-                        <td>
-                              <div className="py-2">
-                                  <span className="d-block text-muted">Warehouse Address</span>
-                                  <span>414 Advert Avenue, NY,USA</span>
-                                </div>
-                            </td>
-                      </tr>
-                    </tbody>
+                    <tr>
+                      <td>
+                        <div className="py-2">
+                          <span className="d-block text-muted">Order Date</span>
+                          <span>{getCurrentDate()}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="py-2">
+                          <span className="d-block text-muted">Prebooking No</span>
+                          <span>{props.prebookingNumber}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="py-2">
+                          <span className="d-block text-muted">Payment</span>
+                          <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width={20} /></span>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="py-2">
+                          <span className="d-block text-muted">Warehouse Address</span>
+                          <span>414 Advert Avenue, NY,USA</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <div className="product border-bottom table-responsive">
                 <table className="table table-borderless">
                   <tbody>
-                      <tr>
-                        <td width="60%">
-                              <span className="font-weight-bold">{props.product}</span>
-                              <div className="product-qty mt-2">
-                                  <span className="d-block">
-                                      Quantity:{props.quantity}
-                                    </span>
-                                </div>
-                            </td>
-                        <td width="20%">
-                              <div className="text-right">
-                                  <span className="font-weight-bold">
-                                      ${props.price}
-                                      {' '}
-                                      <span className="text-muted">per unit</span>
-                                    </span>
-                                </div>
-                            </td>
-                      </tr>
+                    <tr>
+                      <td width="60%">
+                        <span className="font-weight-bold">{props.product}</span>
+                        <div className="product-qty mt-2">
+                          <span className="d-block">
+                            Quantity:
+                            {props.quantity}
+                          </span>
+                        </div>
+                      </td>
+                      <td width="20%">
+                        <div className="text-right">
+                          <span className="font-weight-bold">
+                            $
+                            {props.price}
+                            {' '}
+                            <span className="text-muted">per unit</span>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
 
-                    </tbody>
+                  </tbody>
                 </table>
               </div>
               <div className="row d-flex justify-content-end">
                 <div className="col-md-5">
                   <table className="table table-borderless">
-                      <tbody className="totals">
-                        <tr className="border-top border-bottom">
-                              <td>
-                                  <div className="text-left">
-                                      <span className="font-weight-bold">Subtotal</span>
-                                    </div>
-                                </td>
-                              <td>
-                                  <div className="text-right">
-                                      <span className="font-weight-bold">
-                                          ${props.totalPrice}
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                      </tbody>
-                    </table>
+                    <tbody className="totals">
+                      <tr className="border-top border-bottom">
+                        <td>
+                          <div className="text-left">
+                            <span className="font-weight-bold">Subtotal</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="text-right">
+                            <span className="font-weight-bold">
+                              $
+                              {props.totalPrice}
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <p>Show this invoice at the warehouse to pickup the product.</p>

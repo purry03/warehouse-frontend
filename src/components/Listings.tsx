@@ -8,7 +8,7 @@ import Button from './Button';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import api, { listing } from '../api';
+import api from '../api';
 
 function Listings() {
   const [cookies, setCookies] = useCookies(['username', 'accessToken', 'refreshToken']);
@@ -17,29 +17,33 @@ function Listings() {
 
   async function getListings() {
     try {
-      const apiListings = await api.listing.getByUsername(cookies.username, cookies.accessToken);
+      const apiListings:any[] = await api.listing.getByUsername(cookies.username, cookies.accessToken);
       setListings(apiListings);
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err.toString());
     }
   }
 
-  useState(() => {
+  useState(
+    () => {
     getListings();
-  }, []);
+  },
+  // @ts-ignore
+  [],
+  );
 
   async function removeListing(elm) {
     try {
       const id = elm.target.getAttribute('id');
       await api.listing.removeByID(id, cookies.accessToken);
-      setListings(listings.filter((itm) => itm.listing_id !== id));
+      setListings(listings.filter((itm: Listing) => itm.listing_id !== id));
       toast.success('Deleted Listing');
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err.toString());
     }
   }
 
-  const listingRows = listings.map((itm) => (
+  const listingRows = listings.map((itm : Listing) => (
     <tr key={itm.listing_id}>
       <td id="title">{itm.title}</td>
       <td id="description">{itm.description}</td>

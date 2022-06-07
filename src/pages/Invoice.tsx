@@ -14,6 +14,7 @@ import Button from '../components/Button';
 import './Invoice.css';
 
 function Invoice(props) {
+  // @ts-ignore
   const [cookies, setCookies] = useCookies('username', 'accessToken', 'refreshToken');
 
   const {

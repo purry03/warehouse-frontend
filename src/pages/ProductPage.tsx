@@ -14,7 +14,7 @@ import Button from '../components/Button';
 
 function ProductPage() {
   const { id } = useParams();
-  const [productsState, setProductsState] = useState({ product: {} });
+  const [productsState, setProductsState] = useState<ProductState>({ product: {} });
   const [prebookingQuantity, setPrebookingQuantity] = useState(1);
   const [prebooked, setPrebooked] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
@@ -44,13 +44,13 @@ function ProductPage() {
 
   async function prebook() {
     setPrebooked(true);
-    setPrice(productsState.product.price * parseInt(prebookingQuantity, 10));
+    setPrice(productsState.product.price * prebookingQuantity);
   }
 
   async function onPayment() {
     try {
-      const response = await api.prebookings.book(cookies.accessToken, productsState.product.listing_id, prebookingQuantity);
-      setPrebookingNumber(response.data.prebooking_number);
+      const response:NewPrebooking = await api.prebookings.book(cookies.accessToken, productsState.product.listing_id, prebookingQuantity);
+      setPrebookingNumber(response.prebooking_number);
       setPaymentCompleted(true);
     } catch (err) {
       toast.error(err.toString());
@@ -86,7 +86,7 @@ function ProductPage() {
             Quantity:
             <input value={prebookingQuantity} onChange={changeQuantity} min="1" type="number" />
           </label>
-          <Button className="prebooking-button" title="Prebook" onClick={prebook} />
+          <Button title="Prebook" onClick={prebook} />
         </div>
       </div>
     </div>

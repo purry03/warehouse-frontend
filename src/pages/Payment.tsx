@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import './Payment.css';
 
 function Payment(props) {
+  // @ts-ignore
   const [cookies] = useCookies('username', 'accessToken', 'refreshToken');
 
   const {
@@ -69,7 +70,7 @@ function Payment(props) {
                   </div>
                 </div>
                 <div className="d-flex h7 mb-2">
-                  <p className>Total Amount</p>
+                  <p>Total Amount</p>
                   <p className="ms-auto">
                     <span className="fas fa-dollar-sign" />
                     {totalPrice}
@@ -79,7 +80,7 @@ function Payment(props) {
                   <p className="textmuted">Taxes Excluded</p>
                 </div>
               </div>
-              <div className>
+              <div>
                 <p className="h7 fw-bold mb-1">Pay this Invoice</p>
                 <p className="textmuted h8 mb-2">Make payment for this invoice by filling in the details</p>
                 <div className="form">

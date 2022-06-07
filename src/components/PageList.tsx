@@ -7,11 +7,13 @@ function PageList(props) {
   const { pages, currentPage, changePage } = props;
 
   function createPages(n) {
-    const elements = [];
+    const elements:JSX.Element[] = [];
     for (let i = 0; i < n; i += 1) {
       if (currentPage === i + 1) {
+        // @ts-ignore
         elements.push(<a key={i} value={i + 1}>{i + 1}</a>);
       } else {
+        // @ts-ignore
         elements.push(<a key={i} onClick={changePage} value={i + 1} href="#">{i + 1}</a>);
       }
     }

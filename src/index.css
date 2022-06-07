@@ -21,3 +21,7 @@ body {
     font-family: 'Roboto Flex', sans-serif;
 
 }
+
+.Toastify__toast-container {
+    margin-top: 100px;
+}

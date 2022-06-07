@@ -8,7 +8,7 @@ import Button from './Button';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import api, { listing } from '../api';
+import api from '../api';
 
 function AddListing() {
   const [cookies, setCookies] = useCookies(['username', 'accessToken', 'refreshToken']);
@@ -29,8 +29,9 @@ function AddListing() {
     try {
       const formData = new FormData();
       for (const [key, value] of Object.entries(inputField)) {
-        formData.append(key, value);
+        formData.append(key, value.toString());
       }
+      // @ts-ignore
       formData.append('img', selectedFile);
       await api.listing.create(formData, cookies.accessToken);
       toast.success('Listing created');
@@ -41,7 +42,7 @@ function AddListing() {
         inventory: 0,
       });
       setSelectedFile(null);
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err.toString());
     }
   }
@@ -64,7 +65,7 @@ function AddListing() {
         </label>
         <label>
           <span>Description: </span>
-          <textarea name="description" onChange={onChange} type="text" placeholder="Product Name" value={inputField.description} />
+          <textarea name="description" onChange={onChange} placeholder="Product Name" value={inputField.description} />
         </label>
         <label>
           <span>Image: </span>

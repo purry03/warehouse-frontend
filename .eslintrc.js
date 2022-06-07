@@ -19,6 +19,8 @@ module.exports = {
   ],
   rules: {
     indent: 'off',
+    'no-undef': 'off',
+    'linebreak-style': 0,
     'no-param-reassign': 0,
     'no-restricted-syntax': 0,
     'max-len': 0,
@@ -31,5 +33,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interaction': 0,
     'jsx-a11y/interactive-supports-focus': 0,
     'jsx-a11y/anchor-is-valid': 0,
+    'import/extensions': 0,
+    'import/no-unresolved': 0,
   },
 };

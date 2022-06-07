@@ -1,6 +1,6 @@
-const axios = require('axios');
+import axios from 'axios';
 
-const refresh = (username, refreshToken) => new Promise((resolve, reject) => {
+const refresh = (username:string, refreshToken:string):Promise<User> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
     url: 'http://localhost:8080/api/auth/refresh',
@@ -14,12 +14,12 @@ const refresh = (username, refreshToken) => new Promise((resolve, reject) => {
       accessToken: response.data.access_token,
       refreshToken: response.data.refresh_token,
     });
-  }).catch((err) => {
+  }).catch((err:any) => {
     reject(err);
   });
 });
 
-const verify = (accessToken) => new Promise((resolve, reject) => {
+const verify = (accessToken:string):Promise<boolean> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
     url: 'http://localhost:8080/api/auth/verify',
@@ -33,7 +33,7 @@ const verify = (accessToken) => new Promise((resolve, reject) => {
   });
 });
 
-module.exports = {
+export default {
   refresh,
   verify,
 };

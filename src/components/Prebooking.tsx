@@ -8,10 +8,9 @@ import Button from './Button';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import api, { listing } from '../api';
+import api from '../api';
 
 import PrebookingDetails from './PrebookingDetails';
-import { approve, cancel } from '../api/prebooking';
 
 function Prebooking() {
   const [cookies, setCookies] = useCookies(['username', 'accessToken', 'refreshToken']);
@@ -32,11 +31,11 @@ function Prebooking() {
   async function getPrebookingDetails(elm) {
     const { prebookingNumber } = inputField;
     try {
-      const prebooking = await api.prebookings.get(prebookingNumber, cookies.accessToken);
+      const prebooking:Prebooking = await api.prebookings.get(prebookingNumber, cookies.accessToken);
       setPrebookingDetails(prebooking);
       setDetailsFetched(true);
       toast.success('Prebooking Fetched');
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err.toString());
     }
   }
@@ -44,11 +43,11 @@ function Prebooking() {
   async function cancelPrebooking() {
     const { prebookingNumber } = inputField;
     try {
-      const prebooking = await api.prebookings.cancel(prebookingNumber, cookies.accessToken);
+      const prebooking:Prebooking = await api.prebookings.cancel(prebookingNumber, cookies.accessToken);
       setPrebookingDetails(prebooking);
       setDetailsFetched(true);
       toast.success('Prebooking Canceled');
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err.toString());
     }
   }
@@ -56,15 +55,16 @@ function Prebooking() {
   async function approvePrebooking() {
     const { prebookingNumber } = inputField;
     try {
-      const prebooking = await api.prebookings.approve(prebookingNumber, cookies.accessToken);
+      const prebooking:Prebooking = await api.prebookings.approve(prebookingNumber, cookies.accessToken);
       setPrebookingDetails(prebooking);
       setDetailsFetched(true);
       toast.success('Prebooking Aprroved');
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err.toString());
     }
   }
 
+  // @ts-ignore
   const details = detailsFetched ? <PrebookingDetails details={prebookingDetails} onApprove={approvePrebooking} onCancel={cancelPrebooking} /> : null;
 
   return (

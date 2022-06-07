@@ -1,6 +1,6 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
-const create = (formData, accessToken) => new Promise((resolve, reject) => {
+const create = (formData:FormData, accessToken:string):Promise<Listing[]> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
     url: 'http://localhost:8080/api/listing/add',
@@ -11,23 +11,23 @@ const create = (formData, accessToken) => new Promise((resolve, reject) => {
     data: formData,
   }).then((response) => {
     resolve(response.data);
-  }).catch((err) => {
+  }).catch((err:any) => {
     reject(err);
   });
 });
 
-const getAll = () => new Promise((resolve, reject) => {
+const getAll = ():Promise<Listing[]> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
     url: 'http://localhost:8080/api/listing/search',
   }).then((response) => {
     resolve(response.data);
-  }).catch((err) => {
+  }).catch((err:any) => {
     reject(err);
   });
 });
 
-const getByID = (id) => new Promise((resolve, reject) => {
+const getByID = (id:string):Promise<Listing> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
     url: `http://localhost:8080/api/listing/id/${id}`,
@@ -38,7 +38,7 @@ const getByID = (id) => new Promise((resolve, reject) => {
   });
 });
 
-const removeByID = (id, accessToken) => new Promise((resolve, reject) => {
+const removeByID = (id:string, accessToken:string):Promise<Listing> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
     url: `http://localhost:8080/api/listing/remove/${id}`,
@@ -52,7 +52,7 @@ const removeByID = (id, accessToken) => new Promise((resolve, reject) => {
   });
 });
 
-const getByUsername = (username, accessToken) => new Promise((resolve, reject) => {
+const getByUsername = (username:string, accessToken:string):Promise<Listing[]> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
     url: `http://localhost:8080/api/listing/seller/${username}`,
@@ -66,6 +66,6 @@ const getByUsername = (username, accessToken) => new Promise((resolve, reject) =
   });
 });
 
-module.exports = {
+export default {
   create, getAll, getByID, removeByID, getByUsername,
 };

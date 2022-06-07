@@ -1,6 +1,6 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
-const login = (username, password) => new Promise((resolve, reject) => {
+const login = (username: string, password: string):Promise<User> => new Promise((resolve, reject) => {
     axios({
         method: 'post',
         url: 'http://localhost:8080/api/auth/login',
@@ -15,12 +15,12 @@ const login = (username, password) => new Promise((resolve, reject) => {
             refreshToken: response.data.refresh_token,
             type: response.data.type,
         });
-    }).catch((err) => {
+    }).catch((err:any) => {
         reject(err);
     });
 });
 
-const register = (username, password, type) => new Promise((resolve, reject) => {
+const register = (username:string, password:string, type:string):Promise<boolean> => new Promise((resolve, reject) => {
     axios({
         method: 'post',
         url: 'http://localhost:8080/api/auth/register',
@@ -36,7 +36,7 @@ const register = (username, password, type) => new Promise((resolve, reject) => 
     });
 });
 
-module.exports = {
+export default {
     login,
     register,
 };

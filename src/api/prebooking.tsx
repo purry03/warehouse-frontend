@@ -1,8 +1,6 @@
-const axios = require('axios');
+import axios from 'axios';
 
-const tokens = require('../utils/tokens');
-
-const book = (accessToken, productID, quantity) => new Promise((resolve, reject) => {
+const book = (accessToken:string, productID:number, quantity:number) => new Promise((resolve, reject) => {
   axios({
     method: 'post',
     url: 'http://localhost:8080/api/prebooking/book',
@@ -14,13 +12,13 @@ const book = (accessToken, productID, quantity) => new Promise((resolve, reject)
       quantity,
     },
   }).then((response) => {
-    resolve(response);
+    resolve(response.data);
   }).catch((err) => {
     reject(err.response.data.err);
   });
 });
 
-const get = (prebookingNumber, accessToken) => new Promise((resolve, reject) => {
+const get = (prebookingNumber:string, accessToken:string):Promise<Prebooking> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
     url: 'http://localhost:8080/api/prebooking/get',
@@ -37,7 +35,7 @@ const get = (prebookingNumber, accessToken) => new Promise((resolve, reject) => 
   });
 });
 
-const approve = (prebookingNumber, accessToken) => new Promise((resolve, reject) => {
+const approve = (prebookingNumber:string, accessToken:string):Promise<Prebooking> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
     url: 'http://localhost:8080/api/prebooking/approve',
@@ -54,7 +52,7 @@ const approve = (prebookingNumber, accessToken) => new Promise((resolve, reject)
   });
 });
 
-const cancel = (prebookingNumber, accessToken) => new Promise((resolve, reject) => {
+const cancel = (prebookingNumber:string, accessToken:string):Promise<Prebooking> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
     url: 'http://localhost:8080/api/prebooking/cancel',
@@ -71,6 +69,6 @@ const cancel = (prebookingNumber, accessToken) => new Promise((resolve, reject) 
   });
 });
 
-module.exports = {
+export default {
   book, get, approve, cancel,
 };

@@ -16,7 +16,7 @@ import Dashboard from './pages/Dashboard';
 
 import store from './store';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 root.render(
   <CookiesProvider>

@@ -12,7 +12,7 @@ import api from '../api';
 
 import Button from '../components/Button';
 
-function Auth() {
+function Auth():JSX.Element {
   const [inputField, setInputField] = useState({
     username: '',
     password: '',
@@ -43,7 +43,7 @@ function Auth() {
       setCookies('type', response.type, { path: '/' });
       setType(response.type);
       setLoggedIn(true);
-    } catch (err) {
+    } catch (err:any) {
       if (err.status === 401) {
         toast.error('Incorrect Credentials');
         return;
@@ -61,7 +61,7 @@ function Auth() {
       await api.auth.register(inputField.username, inputField.password, inputField.type);
       toast.success('Successfully Registered');
       login();
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err.toString());
     }
   }
@@ -72,17 +72,21 @@ function Auth() {
     }
     if (type === 'buyer') {
       return (<Navigate to="/products" />);
-    }
-  } else {
-    return (
-      <div>
-        <div className="auth-wrapper">
-          <Login onChange={onChange} inputField={inputField} submit={login} />
-          <Register onChange={onChange} inputField={inputField} submit={register} />
-        </div>
-      </div>
-    );
   }
+    return (<Navigate to="/auth" />);
+  }
+    return (
+      <>
+
+        <div>
+          <div className="auth-wrapper">
+            <Login onChange={onChange} inputField={inputField} submit={login} />
+            <Register onChange={onChange} inputField={inputField} submit={register} />
+          </div>
+        </div>
+
+      </>
+    );
 }
 
 function Login(props) {

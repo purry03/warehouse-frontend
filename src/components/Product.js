@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import './Product.css';
 
 function Product(props) {
+  const {
+    id,
+    img,
+    title,
+    description,
+    price,
+    onClick,
+  } = props;
+
   return (
-    <div className="product" data-index={props.id} onClick={props.onClick}>
+    <div className="product" data-index={id} onClick={onClick} role="button">
       <div className="image-wrapper">
-        <img src={`http://localhost:8080/${props.img}`} alt="Product" />
+        <img src={`http://localhost:8080/${img}`} alt="Product" />
       </div>
       <div className="content-wrapper">
-        <h3 className="title">{props.title}</h3>
-        <p className="description">{props.description}</p>
+        <h3 className="title">{title}</h3>
+        <p className="description">{description}</p>
         <h5 className="price">
-          {props.price}
+          {price}
           $
         </h5>
       </div>
     </div>
   );
 }
+
+Product.propTypes = {
+  id: PropTypes.number.isRequired,
+  img: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Product;

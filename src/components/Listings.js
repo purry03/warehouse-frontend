@@ -15,37 +15,37 @@ function Listings() {
 
   const [listings, setListings] = useState([]);
 
-  useState(() => {
-    getListings();
-  }, []);
-
   async function getListings() {
     try {
-      const listings = await api.listing.getByUsername(cookies.username, cookies.accessToken);
-      setListings(listings);
+      const apiListings = await api.listing.getByUsername(cookies.username, cookies.accessToken);
+      setListings(apiListings);
     } catch (err) {
       toast.error(err.toString());
     }
   }
 
+  useState(() => {
+    getListings();
+  }, []);
+
   async function removeListing(elm) {
     try {
       const id = elm.target.getAttribute('id');
       await api.listing.removeByID(id, cookies.accessToken);
-      setListings(listings.filter((listing) => listing.listing_id != id));
+      setListings(listings.filter((itm) => itm.listing_id !== id));
       toast.success('Deleted Listing');
     } catch (err) {
       toast.error(err.toString());
     }
   }
 
-  const listingRows = listings.map((listing) => (
-    <tr key={listing.listing_id}>
-      <td id="title">{listing.title}</td>
-      <td id="description">{listing.description}</td>
-      <td id="price">{listing.price}</td>
-      <td id="inventoy">{listing.inventory}</td>
-      <td><button id={listing.listing_id} onClick={removeListing}>Remove</button></td>
+  const listingRows = listings.map((itm) => (
+    <tr key={itm.listing_id}>
+      <td id="title">{itm.title}</td>
+      <td id="description">{itm.description}</td>
+      <td id="price">{itm.price}</td>
+      <td id="inventoy">{itm.inventory}</td>
+      <td><button type="button" id={itm.listing_id} onClick={removeListing}>Remove</button></td>
     </tr>
   ));
 

@@ -9,7 +9,11 @@ const refresh = (username, refreshToken) => new Promise((resolve, reject) => {
       refresh_token: refreshToken,
     },
   }).then((response) => {
-    resolve({ username: response.data.username, accessToken: response.data.access_token, refreshToken: response.data.refresh_token });
+    resolve({
+      username: response.data.username,
+      accessToken: response.data.access_token,
+      refreshToken: response.data.refresh_token,
+    });
   }).catch((err) => {
     reject(err);
   });
@@ -22,11 +26,14 @@ const verify = (accessToken) => new Promise((resolve, reject) => {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
-  }).then((response) => {
+  }).then(() => {
     resolve(true);
   }).catch((err) => {
     reject(err);
   });
 });
 
-module.exports = { refresh, verify };
+module.exports = {
+  refresh,
+  verify,
+};

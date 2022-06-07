@@ -12,7 +12,6 @@ const create = (formData, accessToken) => new Promise((resolve, reject) => {
   }).then((response) => {
     resolve(response.data);
   }).catch((err) => {
-    console.log(err);
     reject(err);
   });
 });

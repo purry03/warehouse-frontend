@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
+
+import PropTypes from 'prop-types';
+
 import './ProductPage.css';
 
 import { Cookies, useCookies } from 'react-cookie';
@@ -12,6 +15,14 @@ import './Invoice.css';
 
 function Invoice(props) {
   const [cookies, setCookies] = useCookies('username', 'accessToken', 'refreshToken');
+
+  const {
+    prebookingNumber,
+    product,
+    price,
+    totalPrice,
+    quantity,
+  } = props;
 
   function getCurrentDate(separator = '-') {
     const newDate = new Date();
@@ -33,7 +44,7 @@ function Invoice(props) {
         <div className="col-md-8">
           <div className="card">
             <div className="text-left logo p-2 px-5">
-              <img src="https://imgur.com/zBVXXdd.png" width={50} />
+              <img src="https://imgur.com/zBVXXdd.png" width={50} alt="success" />
             </div>
             <div className="invoice p-5">
               <h5>Your order Confirmed!</h5>
@@ -55,13 +66,13 @@ function Invoice(props) {
                       <td>
                         <div className="py-2">
                           <span className="d-block text-muted">Prebooking No</span>
-                          <span>{props.prebookingNumber}</span>
+                          <span>{prebookingNumber}</span>
                         </div>
                       </td>
                       <td>
                         <div className="py-2">
                           <span className="d-block text-muted">Payment</span>
-                          <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width={20} /></span>
+                          <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width={20} alt="mastercard" /></span>
                         </div>
                       </td>
                       <td>
@@ -79,11 +90,11 @@ function Invoice(props) {
                   <tbody>
                     <tr>
                       <td width="60%">
-                        <span className="font-weight-bold">{props.product}</span>
+                        <span className="font-weight-bold">{product}</span>
                         <div className="product-qty mt-2">
                           <span className="d-block">
                             Quantity:
-                            {props.quantity}
+                            {quantity}
                           </span>
                         </div>
                       </td>
@@ -91,7 +102,7 @@ function Invoice(props) {
                         <div className="text-right">
                           <span className="font-weight-bold">
                             $
-                            {props.price}
+                            {price}
                             {' '}
                             <span className="text-muted">per unit</span>
                           </span>
@@ -116,7 +127,7 @@ function Invoice(props) {
                           <div className="text-right">
                             <span className="font-weight-bold">
                               $
-                              {props.totalPrice}
+                              {totalPrice}
                             </span>
                           </div>
                         </td>
@@ -130,7 +141,7 @@ function Invoice(props) {
               <span>The Warehouse</span>
             </div>
             <div className="d-flex justify-content-between footer p-3">
-              <span><a href="#" onClick={print}>Download Invoice</a></span>
+              <span><button type="button" onClick={print}>Download Invoice</button></span>
               <span>{getCurrentDate()}</span>
             </div>
           </div>
@@ -139,5 +150,13 @@ function Invoice(props) {
     </div>
   );
 }
+
+Invoice.propTypes = {
+  prebookingNumber: PropTypes.string.isRequired,
+  product: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  totalPrice: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+};
 
 export default Invoice;

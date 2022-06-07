@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom';
+
 import './Products.css';
 
 import api from '../api';
 
-import { Cookies, useCookies } from 'react-cookie';
-import { Navigate } from 'react-router-dom';
-
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import { useSelector, useDispatch } from 'react-redux';
 import PageList from '../components/PageList';
 import Product from '../components/Product';
 import { set } from './productsSlice';
@@ -43,7 +40,7 @@ function Products() {
 
   function changePage(pageLink) {
     const pgNo = pageLink.currentTarget.getAttribute('value');
-    setCurrentPage(parseInt(pgNo));
+    setCurrentPage(parseInt(pgNo, 10));
   }
 
   function createProducts() {
@@ -51,14 +48,14 @@ function Products() {
     let start = ((currentPage - 1) * itemsOnPage);
     const end = (start + itemsOnPage) < productsState.products.length ? (start + itemsOnPage) : productCount;
 
-    for (; start < end; start++) {
+    for (; start < end; start += 1) {
       products.push(<Product onClick={gotoProduct} key={productsState.products[start].listing_id} id={productsState.products[start].listing_id} img={productsState.products[start].img} title={productsState.products[start].title} description={productsState.products[start].description} price={productsState.products[start].price} />);
     }
     return products;
   }
 
   function changeItemCount(e) {
-    const val = parseInt(e.target.value) || 0;
+    const val = parseInt(e.target.value, 10) || 0;
     dispatch(set(val));
   }
 

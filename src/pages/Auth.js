@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import './Auth.css';
 import cookie, { Cookies, useCookies } from 'react-cookie';
 
@@ -9,7 +11,6 @@ import { toast } from 'react-toastify';
 import api from '../api';
 
 import Button from '../components/Button';
-import { login, register } from '../api/auth';
 
 function Auth() {
   const [inputField, setInputField] = useState({
@@ -85,6 +86,8 @@ function Auth() {
 }
 
 function Login(props) {
+  const { onChange, inputField, submit } = props;
+
   return (
     <div className="login-wrapper">
       <form>
@@ -92,20 +95,31 @@ function Login(props) {
         <label>
           <h3>Username</h3>
           {' '}
-          <input name="username" onChange={props.onChange} value={props.inputField.username} type="text" placeholder="Username" />
+          <input name="username" onChange={onChange} value={inputField.username} type="text" placeholder="Username" />
         </label>
         <label>
           <h3>Password</h3>
           {' '}
-          <input name="password" onChange={props.onChange} value={props.inputField.password} type="password" placeholder="Password" />
+          <input name="password" onChange={onChange} value={inputField.password} type="password" placeholder="Password" />
         </label>
-        <Button onClick={props.submit} title="Login" />
+        <Button onClick={submit} title="Login" />
       </form>
     </div>
   );
 }
 
+Login.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  inputField: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }).isRequired,
+  submit: PropTypes.func.isRequired,
+};
+
 function Register(props) {
+  const { onChange, inputField, submit } = props;
+
   return (
     <div className="register-wrapper">
       <form>
@@ -113,16 +127,16 @@ function Register(props) {
         <label>
           <h3>Name</h3>
           {' '}
-          <input name="full_name" onChange={props.onChange} value={props.inputField.full_name} type="text" placeholder="Full Name" />
+          <input name="full_name" onChange={onChange} value={inputField.full_name} type="text" placeholder="Full Name" />
         </label>
         <label>
           <h3>Username</h3>
           {' '}
-          <input name="username" onChange={props.onChange} value={props.inputField.username} type="text" placeholder="Username" />
+          <input name="username" onChange={onChange} value={inputField.username} type="text" placeholder="Username" />
         </label>
         <label>
           <h3>Account Type</h3>
-          <select name="type" onChange={props.onChange} value={props.inputField.type}>
+          <select name="type" onChange={onChange} value={inputField.type}>
             <option value="seller">Seller</option>
             <option value="buyer">Buyer</option>
           </select>
@@ -130,17 +144,29 @@ function Register(props) {
         <label>
           <h3>Password</h3>
           {' '}
-          <input name="password" onChange={props.onChange} value={props.inputField.password} type="password" placeholder="Password" />
+          <input name="password" onChange={onChange} value={inputField.password} type="password" placeholder="Password" />
         </label>
         <label>
           <h3>Confirm Password</h3>
           {' '}
-          <input name="confirm_password" onChange={props.onChange} value={props.inputField.confirm_password} type="password" placeholder="Reenter Password" />
+          <input name="confirm_password" onChange={onChange} value={inputField.confirm_password} type="password" placeholder="Reenter Password" />
         </label>
-        <Button onClick={props.submit} title="Register" />
+        <Button onClick={submit} title="Register" />
       </form>
     </div>
   );
 }
+
+Register.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  inputField: PropTypes.shape({
+    full_name: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    confirm_password: PropTypes.string.isRequired,
+  }).isRequired,
+  submit: PropTypes.func.isRequired,
+};
 
 export default Auth;

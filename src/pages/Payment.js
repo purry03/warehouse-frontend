@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import './ProductPage.css';
 
-import { Cookies, useCookies } from 'react-cookie';
-import { Navigate, useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-import { toast } from 'react-toastify';
-import api from '../api';
-
-import Button from '../components/Button';
 import './Payment.css';
 
 function Payment(props) {
-  const [cookies, setCookies] = useCookies('username', 'accessToken', 'refreshToken');
+  const [cookies] = useCookies('username', 'accessToken', 'refreshToken');
+
+  const {
+    totalPrice,
+    product,
+    quantity,
+    price,
+    onPayment,
+  } = props;
 
   return (
     <div className="product-wrapper">
@@ -26,7 +31,7 @@ function Payment(props) {
                     <p className="h1 fw-bold d-flex mt-3">
                       {' '}
                       <span className=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1" />
-                      {props.totalPrice}
+                      {totalPrice}
                     </p>
                   </div>
 
@@ -42,24 +47,24 @@ function Payment(props) {
                 <div className="row m-0 border mb-3">
                   <div className="col-6 h8 pe-0 ps-2">
                     <p className="textmuted py-2">Items</p>
-                    <span className="d-block py-2 border-bottom">{props.product}</span>
+                    <span className="d-block py-2 border-bottom">{product}</span>
                   </div>
                   <div className="col-2 text-center p-0">
                     <p className="textmuted p-2">Qty</p>
-                    <span className="d-block p-2 border-bottom">{props.quantity}</span>
+                    <span className="d-block p-2 border-bottom">{quantity}</span>
                   </div>
                   <div className="col-2 p-0 text-center h8 border-end">
                     <p className="textmuted p-2">Price</p>
                     <span className="d-block border-bottom py-2">
                       <span className="fas fa-dollar-sign" />
-                      {props.price}
+                      {price}
                     </span>
                   </div>
                   <div className="col-2 p-0 text-center">
                     <p className="textmuted p-2">Total</p>
                     <span className="d-block py-2 border-bottom">
                       <span className="fas fa-dollar-sign" />
-                      {props.totalPrice}
+                      {totalPrice}
                     </span>
                   </div>
                 </div>
@@ -67,7 +72,7 @@ function Payment(props) {
                   <p className>Total Amount</p>
                   <p className="ms-auto">
                     <span className="fas fa-dollar-sign" />
-                    {props.totalPrice}
+                    {totalPrice}
                   </p>
                 </div>
                 <div className="h8 mb-5">
@@ -99,10 +104,10 @@ function Payment(props) {
                       {' '}
                     </div>
                   </div>
-                  <div className="btn btn-primary d-block h8" onClick={props.onPayment}>
+                  <div className="btn btn-primary d-block h8" onClick={onPayment} onKeyDown={onPayment} role="button" tabIndex={0}>
                     PAY
                     <span className="fas fa-dollar-sign ms-2" />
-                    {props.totalPrice}
+                    {totalPrice}
                     <span className="ms-3 fas fa-arrow-right" />
                   </div>
                 </div>
@@ -114,5 +119,13 @@ function Payment(props) {
     </div>
   );
 }
+
+Payment.propTypes = {
+  totalPrice: PropTypes.number.isRequired,
+  product: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  onPayment: PropTypes.func.isRequired,
+};
 
 export default Payment;

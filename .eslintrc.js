@@ -19,6 +19,17 @@ module.exports = {
   ],
   rules: {
     indent: 'off',
-    '@typescript-eslint/indent': ['error'],
+    'no-param-reassign': 0,
+    'no-restricted-syntax': 0,
+    'max-len': 0,
+    'no-unused-vars': 0,
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-no-bind': 0,
+    'react/jsx-no-useless-fragment': 0,
+    'jsx-a11y/label-has-associated-control': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/no-static-element-interaction': 0,
+    'jsx-a11y/interactive-supports-focus': 0,
+    'jsx-a11y/anchor-is-valid': 0,
   },
 };

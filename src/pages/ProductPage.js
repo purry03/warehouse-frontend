@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './ProductPage.css';
 
-import { Cookies, useCookies } from 'react-cookie';
-import { Navigate, useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { useParams } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import api from '../api';
@@ -11,15 +11,14 @@ import Payment from './Payment';
 import Invoice from './Invoice';
 
 import Button from '../components/Button';
-import PageList from '../components/PageList';
 
-function ProductPage(props) {
+function ProductPage() {
   const { id } = useParams();
   const [productsState, setProductsState] = useState({ product: {} });
   const [prebookingQuantity, setPrebookingQuantity] = useState(1);
   const [prebooked, setPrebooked] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
-  const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken']);
+  const [cookies] = useCookies(['accessToken', 'refreshToken']);
   const [price, setPrice] = useState(0);
   const [prebookingNumber, setPrebookingNumber] = useState('');
 
@@ -45,7 +44,7 @@ function ProductPage(props) {
 
   async function prebook() {
     setPrebooked(true);
-    setPrice(productsState.product.price * parseInt(prebookingQuantity));
+    setPrice(productsState.product.price * parseInt(prebookingQuantity, 10));
   }
 
   async function onPayment() {

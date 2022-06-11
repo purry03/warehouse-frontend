@@ -16,7 +16,7 @@ function Product(props) {
   return (
     <div className="product" data-index={id} onClick={onClick} role="button">
       <div className="image-wrapper">
-        <img src={`http://localhost:8080/${img}`} alt="Product" />
+        <img src={`http://127.0.0.1:8080/${img}`} alt="Product" />
       </div>
       <div className="content-wrapper">
         <h3 className="title">{title}</h3>

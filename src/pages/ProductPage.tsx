@@ -68,7 +68,7 @@ function ProductPage() {
   return (
     <div className="product-wrapper">
       <div className="image-wrapper">
-        <img src={`http://localhost:8080/${productsState.product.img}`} alt="Product" />
+        <img src={`http://127.0.0.1:8080/${productsState.product.img}`} alt="Product" />
       </div>
       <div className="content-wrapper">
         <h1>{productsState.product.title}</h1>

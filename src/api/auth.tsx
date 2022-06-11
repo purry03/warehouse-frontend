@@ -3,7 +3,7 @@ import axios from 'axios';
 const login = (username: string, password: string):Promise<User> => new Promise((resolve, reject) => {
     axios({
         method: 'post',
-        url: 'http://localhost:8080/api/auth/login',
+        url: 'http://127.0.0.1:8080/api/auth/login',
         data: {
             username,
             password,
@@ -23,7 +23,7 @@ const login = (username: string, password: string):Promise<User> => new Promise(
 const register = (username:string, password:string, type:string):Promise<boolean> => new Promise((resolve, reject) => {
     axios({
         method: 'post',
-        url: 'http://localhost:8080/api/auth/register',
+        url: 'http://127.0.0.1:8080/api/auth/register',
         data: {
             username,
             password,

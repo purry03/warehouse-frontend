@@ -3,7 +3,7 @@ import axios from 'axios';
 const refresh = (username:string, refreshToken:string):Promise<User> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
-    url: 'http://localhost:8080/api/auth/refresh',
+    url: 'http://127.0.0.1:8080/api/auth/refresh',
     data: {
       username,
       refresh_token: refreshToken,
@@ -22,7 +22,7 @@ const refresh = (username:string, refreshToken:string):Promise<User> => new Prom
 const verify = (accessToken:string):Promise<boolean> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
-    url: 'http://localhost:8080/api/auth/verify',
+    url: 'http://127.0.0.1:8080/api/auth/verify',
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

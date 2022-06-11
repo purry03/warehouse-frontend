@@ -49,7 +49,6 @@ function Products() {
     const end = (start + itemsOnPage) < productsState.products.length ? (start + itemsOnPage) : productCount;
 
     for (; start < end; start += 1) {
-      // @ts-ignore
       products.push(<Product onClick={gotoProduct} key={productsState.products[start].listing_id} id={productsState.products[start].listing_id} img={productsState.products[start].img} title={productsState.products[start].title} description={productsState.products[start].description} price={productsState.products[start].price} />);
     }
     return products;

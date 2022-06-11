@@ -3,7 +3,7 @@ import axios from 'axios';
 const book = (accessToken:string, productID:number, quantity:number) => new Promise((resolve, reject) => {
   axios({
     method: 'post',
-    url: 'http://localhost:8080/api/prebooking/book',
+    url: 'http://127.0.0.1:8080/api/prebooking/book',
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -21,7 +21,7 @@ const book = (accessToken:string, productID:number, quantity:number) => new Prom
 const get = (prebookingNumber:string, accessToken:string):Promise<Prebooking> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
-    url: 'http://localhost:8080/api/prebooking/get',
+    url: 'http://127.0.0.1:8080/api/prebooking/get',
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -38,7 +38,7 @@ const get = (prebookingNumber:string, accessToken:string):Promise<Prebooking> =>
 const approve = (prebookingNumber:string, accessToken:string):Promise<Prebooking> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
-    url: 'http://localhost:8080/api/prebooking/approve',
+    url: 'http://127.0.0.1:8080/api/prebooking/approve',
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -55,7 +55,7 @@ const approve = (prebookingNumber:string, accessToken:string):Promise<Prebooking
 const cancel = (prebookingNumber:string, accessToken:string):Promise<Prebooking> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
-    url: 'http://localhost:8080/api/prebooking/cancel',
+    url: 'http://127.0.0.1:8080/api/prebooking/cancel',
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

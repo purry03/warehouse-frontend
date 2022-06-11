@@ -3,7 +3,7 @@ import axios from 'axios';
 const create = (formData:FormData, accessToken:string):Promise<Listing[]> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
-    url: 'http://localhost:8080/api/listing/add',
+    url: 'http://127.0.0.1:8080/api/listing/add',
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'content-type': 'multipart/form-data',
@@ -19,7 +19,7 @@ const create = (formData:FormData, accessToken:string):Promise<Listing[]> => new
 const getAll = ():Promise<Listing[]> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
-    url: 'http://localhost:8080/api/listing/search',
+    url: 'http://127.0.0.1:8080/api/listing/search',
   }).then((response) => {
     resolve(response.data);
   }).catch((err:any) => {
@@ -30,7 +30,7 @@ const getAll = ():Promise<Listing[]> => new Promise((resolve, reject) => {
 const getByID = (id:string):Promise<Listing> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
-    url: `http://localhost:8080/api/listing/id/${id}`,
+    url: `http://127.0.0.1:8080/api/listing/id/${id}`,
   }).then((response) => {
     resolve(response.data);
   }).catch((err) => {
@@ -41,7 +41,7 @@ const getByID = (id:string):Promise<Listing> => new Promise((resolve, reject) =>
 const removeByID = (id:string, accessToken:string):Promise<Listing> => new Promise((resolve, reject) => {
   axios({
     method: 'post',
-    url: `http://localhost:8080/api/listing/remove/${id}`,
+    url: `http://127.0.0.1:8080/api/listing/remove/${id}`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -55,7 +55,7 @@ const removeByID = (id:string, accessToken:string):Promise<Listing> => new Promi
 const getByUsername = (username:string, accessToken:string):Promise<Listing[]> => new Promise((resolve, reject) => {
   axios({
     method: 'get',
-    url: `http://localhost:8080/api/listing/seller/${username}`,
+    url: `http://127.0.0.1:8080/api/listing/seller/${username}`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
